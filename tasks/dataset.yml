@@ -1,0 +1,20 @@
+---
+- name: "create {{ item.name }} with extra_zfs_properties"
+  community.general.zfs:
+    name: "{{ item.pool }}/{{ item.name }}"
+    extra_zfs_properties: "{{ item.properties }}"
+    state: "{{ item.state }}"
+  when: item.properties is defined
+  register: result_dataset
+
+- name: "create {{ item.name }} without extra_zfs_properties"
+  community.general.zfs:
+    name: "{{ item.pool }}/{{ item.name }}"
+    state: "{{ item.state }}"
+  when: result_dataset.changed != "false"
+
+- name: "create Daily Snapshot {{ item.name }} {{ current_date }}"
+  community.general.zfs:
+    name: "{{ item.pool }}/{{ item.name }}@Ansible.{{ current_date }}"
+    state: present
+  when: item.Snapshot is defined and item.Snapshot == "Daily"

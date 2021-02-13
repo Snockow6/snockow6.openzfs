@@ -1,0 +1,34 @@
+---
+- name: check ZFS pool existance
+  command: zpool list -Ho name {{ item.name }}
+  register: result_pool_list
+  ignore_errors: yes
+  changed_when: false
+
+- name: create ZFS pool
+  command: >-
+    zpool create
+    {{ '-o' if item.options else '' }} {{ item.options | join(' -o ') }}
+    {{ '-m ' + item.mountpoint if item.mountpoint else '' }}
+    {{ item.name }}
+    {{ item.mode if item.mode else '' }}
+    {{ item.devices | join(' ') }}
+  when:
+    - item.state | default('present') == 'present' #check wether it should exits
+    - item.import is defined and item.import == "false" #Check wether it is to be imported
+    - result_pool_list.rc == 1 #Check that it doesnt already exist
+
+- name: import ZFS pool
+  command: >-
+    zpool import
+    {{ item.name }}
+  when:
+    - item.state | default('present') == 'present' #check wether it should exits
+    - item.import is defined and item.import == "true" #Check wether it is to be imported
+    - result_pool_list.rc == 1 #Check that it doesnt already exi
+
+- name: destroy ZFS pool
+  command: zpool destroy {{ item.name }}
+  when:
+    - item.state | default('present') == 'absent'
+    - result_pool_list.rc == 0

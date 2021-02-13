@@ -1,0 +1,12 @@
+---
+- include_tasks: install.yml
+
+- name: check and create zfs pool
+  loop: "{{ zfs_pool }}"
+  include_tasks: zpool.yml
+  when: item.name is defined
+
+- name: Create and configure Datasets
+  loop: "{{ zfs_datasets }}"
+  include_tasks: dataset.yml
+  when: item.name is defined
