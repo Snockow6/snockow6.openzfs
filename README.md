@@ -12,6 +12,7 @@ This role requires to be used on debian 10, fedora 32 and up, centos 8 and up an
 
 Role Variables
 --------------
+All variables are required even if left empty
 
 zfs_pool:
   name: 'Tank' #Name for the pool
