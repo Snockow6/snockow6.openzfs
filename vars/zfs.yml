@@ -4,10 +4,10 @@ zfs_pool:
 
   - name: "Tank"
     mountpoint: "/Tank"
-    mode: "single"
+    mode: ""
     devices: ["sda"]
     state: "present"
-    options: ["ashift=12"]
+    options: [""]
     import: "false"
 
 zfs_datasets:

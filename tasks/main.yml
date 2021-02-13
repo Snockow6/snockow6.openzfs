@@ -2,6 +2,9 @@
 - include_tasks: Install_RedHat.yml
   when: ansible_os_family == "RedHat"
 
+- include_tasks: Install_Debian.yml
+  when: ansible_os_family == "Debian"
+
 - name: check and create zfs pool
   loop: "{{ zfs_pool }}"
   include_tasks: zpool.yml
