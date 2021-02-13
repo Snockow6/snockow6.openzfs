@@ -1,0 +1,16 @@
+---
+
+zfs_pool:
+
+  - name: "Tank"
+    mountpoint: "/Tank"
+    mode: "single"
+    devices: ["sda"]
+    state: "present"
+    options: ["ashift=12"]
+    import: "false"
+
+zfs_datasets:
+  - name: "Backups"
+    pool: "Tank"
+    state: "present"
