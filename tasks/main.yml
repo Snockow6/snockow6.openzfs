@@ -1,5 +1,6 @@
 ---
-- include_tasks: install.yml
+- include_tasks: Install_RedHat.yml
+  when: ansible_distribution_family == RedHat
 
 - name: check and create zfs pool
   loop: "{{ zfs_pool }}"
