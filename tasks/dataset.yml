@@ -12,9 +12,3 @@
     name: "{{ item.pool }}/{{ item.name }}"
     state: "{{ item.state }}"
   when: result_dataset.changed != "false"
-
-- name: "create Daily Snapshot {{ item.name }} {{ current_date }}"
-  community.general.zfs:
-    name: "{{ item.pool }}/{{ item.name }}@Ansible.{{ current_date }}"
-    state: present
-  when: item.Snapshot is defined and item.Snapshot == "Daily"
