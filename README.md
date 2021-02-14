@@ -13,6 +13,7 @@ It also requires the community.general ansible galaxy collection to be installed
 
 Role Variables
 --------------
+All variables are required even if left empty
 
 zfs_pool:
   name: 'Tank' #Name for the pool
