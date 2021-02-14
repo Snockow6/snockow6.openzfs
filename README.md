@@ -8,6 +8,7 @@ Requirements
 ------------
 
 This role requires to be used on debian 10, fedora 32 and up, centos 8 and up and ubuntu 18.04.
+It also requires the community.general ansible galaxy collection to be installed
 
 
 Role Variables
@@ -34,7 +35,7 @@ zfs_datasets:
 Dependencies
 ------------
 
-This is a self contained Role and will install all Dependencies to run Openzfs.
+This role only requires community.general ansible galaxy collection to be installed. this can be done with ansible-galaxy collection install community.general.
 
 Example Playbook
 ----------------
