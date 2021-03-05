@@ -1,9 +1,10 @@
 ---
 - name: install Openzfs package | Centos 8
-  command: >-
-    dnf install https://zfsonlinux.org/epel/zfs-release.el8_3.noarch.rpm -y
+  dnf: 
+    name: https://zfsonlinux.org/epel/zfs-release.el8_3.noarch.rpm 
+    state: present
+    disable_gpg_check: yes
   when: ansible_distribution  == 'CentOS' and   ansible_distribution_major_version  == '8'
-  changed_when: false
 
 - name: install epel-release and kernel | Centos 8
   dnf:
@@ -21,10 +22,12 @@
   when:  ansible_distribution  == 'CentOS'
 
 - name: install  Openzfs package | Fedora {{ ansible_distribution_major_version }}
-  command: >-
-    dnf install https://zfsonlinux.org/fedora/zfs-release.fc{{ ansible_distribution_major_version }}.noarch.rpm -y
+  dnf: 
+    name: https://zfsonlinux.org/fedora/zfs-release.fc{{ ansible_distribution_major_version }}.noarch.rpm
+    state: present
+    disable_gpg_check: yes
   when:  ansible_distribution  == 'Fedora'
-  changed_when: false
+  
 
 - name: verify Openzfs gpg key | Fedora {{ ansible_distribution_major_version }}
   rpm_key:
