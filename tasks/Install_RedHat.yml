@@ -1,7 +1,7 @@
 ---
 - name: install Openzfs package | Centos 8
   dnf: 
-    name: https://zfsonlinux.org/epel/zfs-release.el8_3.noarch.rpm 
+    name: https://zfsonlinux.org/epel/zfs-release.el8_5.noarch.rpm
     state: present
     disable_gpg_check: yes
   when: ansible_distribution  == 'CentOS' and   ansible_distribution_major_version  == '8'
