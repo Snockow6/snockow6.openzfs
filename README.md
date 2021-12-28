@@ -36,7 +36,8 @@ zfs_datasets:
 Dependencies
 ------------
 
-This role only requires community.general ansible galaxy collection to be installed. this can be done with ansible-galaxy collection install community.general.
+This role only requires community.general ansible galaxy collection to be installed.
+community.general.zfs has been added to requirements.yml under meta. 
 
 Example Playbook
 ----------------
